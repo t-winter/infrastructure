@@ -1,0 +1,22 @@
+# docs: https://kubernetes.io/docs/reference/config-api/kubeadm-config.v1beta4/
+kind: ClusterConfiguration
+apiVersion: kubeadm.k8s.io/v1beta4
+clusterName: "<INSERT CLUSTER NAME>"
+networking:
+  # avoid the 127.0.0.0/8 block even for single node systems as it can cause issues with the cluster networking
+  podSubnet: "10.200.0.0/18"
+  serviceSubnet: "10.200.64.0/20"
+---
+kind: InitConfiguration
+apiVersion: kubeadm.k8s.io/v1beta4
+nodeRegistration:
+  # don't taint the control plane node since it's the only node and has to run productive workloads as well
+  taints: []
+localAPIEndpoint:
+  # these two are optional, try specifying them if something doesn't work
+  advertiseAddress: "k8s-endpoint"
+  bindPort: 6443  # this is the default
+---
+kind: KubeletConfiguration
+apiVersion: kubelet.config.k8s.io/v1beta1
+cgroupDriver: systemd

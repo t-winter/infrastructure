@@ -1,0 +1,22 @@
+# use powerlevel10k theme
+romkatv/powerlevel10k
+
+# add oh-my-zsh plugins
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:lib   # load OMZ's library
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/git-auto-fetch
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/alias-finder
+
+# other plugins
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-autosuggestions
+
+# completions
+zsh-users/zsh-completions
+greymd/docker-zsh-completion
+gangleri/pipenv
+zpm-zsh/ssh
