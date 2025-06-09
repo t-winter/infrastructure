@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - ../../cluster-management/_overlays/contabo3
   - ../../applications/_overlays/contabo3
+  - appproject-contabo3.yaml
+  - application-contabo3.yaml
