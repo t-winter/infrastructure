@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - ../../argo-cd/_overlays/contabo3
+  - ../../external-secrets/_overlays/contabo3
