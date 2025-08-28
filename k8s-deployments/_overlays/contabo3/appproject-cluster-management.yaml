@@ -7,9 +7,16 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # Project description
   description: The root Argo CD project for cluster management. Everything else is deployed by this.
 
-  # Allow manifests to deploy from any Git repos
+  # Allow only the infra repo to deploy stuff in this project; i.e. enforce
+  # dedicated projects (with dedicated limits) for other projects.
   sourceRepos:
     - 'https://github.com/t-winter/infrastructure'
+
+  destinations:
+    - namespace: '*'
+      server: 'https://kubernetes.default.svc'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
