@@ -2,7 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../cluster-management/_overlays/contabo3
-  - ../../applications/_overlays/contabo3
-  - appproject-contabo3.yaml
-  - application-contabo3.yaml
+  - appproject-cluster-management.yaml
+  - application-cluster-management.yaml
+  - applicationset.yaml

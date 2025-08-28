@@ -1,6 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - ../../argo-cd/_overlays/contabo3
-  - ../../external-secrets/_overlays/contabo3

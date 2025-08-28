@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-applications
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - list:
+        elements:
+          - group: cluster-management
+            name: argo-cd
+          - cluster: cluster-management
+            name: external-secrets
+  template:
+    metadata:
+      name: '{{.name}}'
+    spec:
+      project: cluster-management
+      source:
+        repoURL: 'https://github.com/t-winter/infrastructure'
+        targetRevision: HEAD
+        path: "k8s-deployments/{{ .group }}/{{ .name }}/_overlays/contabo3"
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{.name}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
