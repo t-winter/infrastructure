@@ -11,7 +11,7 @@ spec:
         elements:
           - group: cluster-management
             name: argocd
-          - cluster: cluster-management
+          - group: cluster-management
             name: external-secrets
   template:
     metadata:
