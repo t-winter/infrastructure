@@ -9,7 +9,7 @@ spec:
     - list:
         elements:
           - group: cluster-management
-            name: argo-cd
+            name: argocd
           - cluster: cluster-management
             name: external-secrets
   template:
