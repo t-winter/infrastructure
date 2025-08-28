@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - namespace-external-secrets.yaml
-  - application-external-secrets-operator.yaml
+  - application-external-secrets-helm.yaml

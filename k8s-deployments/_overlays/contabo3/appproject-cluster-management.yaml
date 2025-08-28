@@ -13,7 +13,6 @@ spec:
   # dedicated projects (with dedicated limits) for other projects.
   sourceRepos:
     - 'https://github.com/t-winter/infrastructure'
-
   destinations:
     - namespace: '*'
       server: 'https://kubernetes.default.svc'
