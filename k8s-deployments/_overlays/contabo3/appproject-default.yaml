@@ -7,6 +7,8 @@ spec:
   sourceRepos: []
   sourceNamespaces: []
   destinations: []
+  orphanedResources:
+    warn: false
   namespaceResourceBlacklist:
     - group: '*'
       kind: '*'

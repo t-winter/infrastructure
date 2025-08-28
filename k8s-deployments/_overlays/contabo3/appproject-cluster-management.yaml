@@ -16,6 +16,8 @@ spec:
   destinations:
     - namespace: '*'
       server: 'https://kubernetes.default.svc'
+  orphanedResources:
+    warn: false
   clusterResourceWhitelist:
     - group: '*'
       kind: '*'

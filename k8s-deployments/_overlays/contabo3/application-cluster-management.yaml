@@ -12,6 +12,8 @@ spec:
   destination:
     namespace: default
     server: 'https://kubernetes.default.svc'
+  orphanedResources:
+    warn: false
   syncPolicy:
     automated:
       prune: true
