@@ -117,6 +117,38 @@ We will use containerd as container runtime. We installed it with docker earlier
    1. add the helm repo with `helm repo add cilium https://helm.cilium.io/`
    2. install cilium (replace the version with the current one!) with `helm install cilium cilium/cilium --version 1.17.4 --namespace kube-system --set operator.replicas=1`
 
+## Deploy applications to the cluster
+
+### Initial deployment[s.yaml](../../s.yaml)
+
+1. Deploy Argo CD with `kubectl apply -k k8s-deployments/cluster-management/argo-cd/_overlays/<env name>`
+2. Deploy remaining applications with `kubectl apply -k k8s-deployments/_overlays/<env name>`
+
+### Connect to secrets stored in Github
+
+This assumes that you already have an environment in Github containing all required secrets. Steps to detect and fix it in case something is missing are below.
+
+1. Create a new App in your Github profile or organization (I'm using a private profile). Only the following settings have to be changed:
+    - you can disable webhooks
+    - you have to set a homepage URL (but that doesn't have to be real), the prefix `https://` seems to be required
+    - at least read-only access to environments (in repository permissions)
+2. install the app to your profile and repo (in the settings for the app)
+3. adjust the values in the ClusterSecretStore if necessary (see ks-deployments/cluster-management/external-secrets)
+4. create a private key for the app in Github (in the apps settings) and use it to create a Kubernetes secret as follows:
+   ```yaml
+   apiVersion: v1
+   kind: Secret
+   metadata:
+       namespace: external-secrets
+       name: github-app-private-key
+   stringData:
+       private-key.pem: |
+           -----BEGIN RSA PRIVATE KEY-----
+           <replace this with your private key>
+           -----END RSA PRIVATE KEY-----
+   ```
+5. wait a bit until the ClusterSecretStore is ready
+
 
 
 ## TODO:
