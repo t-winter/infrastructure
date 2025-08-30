@@ -13,6 +13,8 @@ spec:
             name: argocd
           - group: cluster-management
             name: external-secrets
+          - group: cluster-management
+            name: openebs
   template:
     metadata:
       name: '{{.name}}'

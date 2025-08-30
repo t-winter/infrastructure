@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openebs-helm
+  namespace: argocd
+spec:
+  project: openebs-helm
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: openebs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    repoURL: 'https://openebs.github.io/openebs'
+    chart: 'openebs'
+    targetRevision: '4.1.3'
+    helm:
+      valuesObject:
+        engines:
+          local:
+            # we don't use either on this host
+            zfs:
+              enabled: false
+            lvm:
+              enabled: false
+          replicated:
+            mayastor:
+              # this cluster only has a single node, i.e. no need or room for replication
+              enabled: false

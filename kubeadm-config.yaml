@@ -12,6 +12,9 @@ apiVersion: kubeadm.k8s.io/v1beta4
 nodeRegistration:
   # don't taint the control plane node since it's the only node and has to run productive workloads as well
   taints: []
+  kubeletExtraArgs:
+    - name: 'node-labels'
+      value: 'openebs.io/engine=mayastor'  # label this node as a candidate for OpenEBS
 localAPIEndpoint:
   # these two are optional, try specifying them if something doesn't work
   advertiseAddress: "k8s-endpoint"

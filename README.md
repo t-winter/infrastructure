@@ -6,7 +6,6 @@ This is my current kubernetes based setup used for my infrastructure.
 
 find solutions for
 
-- provider for PVs and PVCs (Longhorn?)
 - backup
   - used software (velero, kasten k10 or something else?)
   - used storage backend (restic or kopia?)
@@ -70,6 +69,9 @@ We will use containerd as container runtime. We installed it with docker earlier
    net.bridge.bridge-nf-call-iptables = 1
    # enable ip forwarding
    net.ipv4.ip_forward = 1
+   
+   # enable HugePages for OpenEBS, see https://openebs.io/docs/quickstart-guide/prerequisites#verifyenable-huge-page-support
+   vm.nr_hugepages = 1024
    ```
 4. reload kernel config with `sudo sysctl --system`
 5. configure containerd to use systemd as cgroup driver by

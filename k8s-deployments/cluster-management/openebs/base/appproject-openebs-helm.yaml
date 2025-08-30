@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: openebs-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Effectively disable the use of the default project
+  sourceRepos:
+    - 'https://openebs.github.io/openebs'
+  destinations:
+    - server: "https://kubernetes.default.svc"
+      namespace: openebs
+  orphanedResources:
+    warn: false
+  namespaceResourceWhitelist:
+    # these should be all vanilla K8s API scopes
+    - group: ''
+      kind: '*'
+    - group: 'apps'
+      kind: '*'
+    - group: 'autoscaling'
+      kind: '*'
+    - group: 'batch'
+      kind: '*'
+    - group: 'coordination.k8s.io'
+      kind: '*'
+    - group: 'discovery.k8s.io'
+      kind: '*'
+    - group: 'events.k8s.io'
+      kind: '*'
+    # not allowing ingress and network policy config
+    #- group: 'networking.k8s.io'
+    #  kind: '*'
+    - group: 'policy'
+      kind: '*'
+    - group: 'rbac.authorization.k8s.io'
+      kind: '*'
+    - group: 'storage.k8s.io'
+      kind: '*'
+  clusterResourceWhitelist:
+    - group: 'apiextensions.k8s.io'
+      kind: '*'
+    - group: 'admissionregistration.k8s.io'
+      kind: '*'
+    - group: 'rbac.authorization.k8s.io'
+      kind: '*'
