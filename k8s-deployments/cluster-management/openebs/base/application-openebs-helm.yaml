@@ -15,9 +15,10 @@ spec:
   source:
     repoURL: 'https://openebs.github.io/openebs'
     chart: 'openebs'
-    targetRevision: '4.1.3'
+    targetRevision: '4.3.3'
     helm:
       valuesObject:
+        # values (select used version first): https://github.com/openebs/openebs/blob/develop/charts/values.yaml
         engines:
           local:
             # we don't use either on this host
@@ -29,3 +30,19 @@ spec:
             mayastor:
               # this cluster only has a single node, i.e. no need or room for replication
               enabled: false
+        localpv-provisioner:
+          crds.csi.volumeSnapshots.enabled: true
+          # values (select used version first, see Chart.yaml in parent chart): https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/deploy/helm/charts/values.yaml
+          analytics.enabled: false
+          localpv:
+            basePath: '/var/openebs/localpv'
+          hostpathClass:
+            isDefaultClass: true
+        # Loki and Alloy are deployed by default "for collecting debugging information and capture cluster state".
+        # It seems to me like this is for testing and development, so I've disabled it here.
+        # Relevant release note: https://github.com/openebs/openebs/releases/tag/v4.3.0
+        # TODO: The OpenEBS components use an unusual label for logging, we may have to adjust the values for that or actually use the logging components from the helm chart
+        loki:
+          enabled: false
+        alloy:
+          enabled: false
